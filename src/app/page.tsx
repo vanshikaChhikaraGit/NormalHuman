@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { UserButton } from "@clerk/nextjs";
 
-export default async function Home() {
+export default function Home() {
 
   return (
     <h1 className="text-red-500">
