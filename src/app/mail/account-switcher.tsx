@@ -23,8 +23,8 @@ if(!accounts)return <></>
             "flex h-9 w-9 shrink-0 items-center justify-center p-0 [&>span]:w-auto [&>svg]:hidden"
          
 )} 
-aria-label="Select account">
-
+aria-label="Select account" >
+   
     <SelectValue placeholder={'Select an account'}>
         <span className={cn({'hidden':!isCollapsed})}>
             {

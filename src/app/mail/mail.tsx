@@ -12,6 +12,8 @@ import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import AccountSwitcher from "./account-switcher";
 import Sidebar from "./sidebar";
+import ThreadList from "./thread-list";
+import ThreadDisplay from "./thread-display";
 type Props = {
   defaultLayout: number[] | undefined;
   navCollapsedSize: number;
@@ -92,17 +94,17 @@ const Mail = ({
             search bar
 
             <TabsContent value="inbox">
-                inbox
+                <ThreadList></ThreadList>
             </TabsContent>
 
             <TabsContent value="done">
-                done
+               <ThreadList></ThreadList>
             </TabsContent>
           </Tabs>
         </ResizablePanel>
         <ResizableHandle withHandle></ResizableHandle>
       <ResizablePanel defaultSize={defaultLayout[2]} minSize={30}>
-       thread display
+      <ThreadDisplay></ThreadDisplay>
       </ResizablePanel>
       </ResizablePanelGroup>
     </TooltipProvider>
