@@ -4,6 +4,8 @@ import React from "react";
 import { KBarAnimator, Action, KBarPortal, KBarPositioner, KBarProvider, KBarSearch } from 'kbar'
 import RenderResults from "./render-results";
 import { useLocalStorage } from "usehooks-ts";
+import useThemeSwitching from "./use-theme-switching";
+import useAccountSwitching from "./use-account-switching";
 
 export default function KBar({children}:{children:React.ReactNode}){
 
@@ -74,6 +76,8 @@ export default function KBar({children}:{children:React.ReactNode}){
 }
 
 const ActualComponent = ({children}:{children:React.ReactNode})=>{
+useThemeSwitching()
+useAccountSwitching()
 return <>
 <KBarPortal>
     <KBarPositioner className="fixed inset-0 bg-black/40 dark:bg-black/80 backdrop-blur-sm scrollbar-hide !p-0 z-[990]">

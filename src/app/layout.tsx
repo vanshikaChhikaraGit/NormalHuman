@@ -6,6 +6,7 @@ import { ClerkProvider } from '@clerk/nextjs'
 import { TRPCReactProvider } from "@/trpc/react";
 import { ThemeProvider } from "@/components/ui/theme-provider";
 import KBar from "@/components/kbar";
+import { Toaster } from "sonner";
 
 export const metadata: Metadata = {
   title: "Normal Human",
@@ -33,6 +34,7 @@ export default function RootLayout({
           disableTransitionOnChange>
             <KBar>
             {children}
+            <Toaster richColors={true}></Toaster>
             </KBar>
           </ThemeProvider>
         </TRPCReactProvider>

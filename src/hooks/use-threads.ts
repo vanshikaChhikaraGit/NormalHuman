@@ -17,7 +17,8 @@ tab,
 done,
 accountId
 },{
-    enabled:!!accountId&&!!tab, placeholderData:e=>e,refetchInterval:5000
+    enabled:!!accountId&&!!tab, placeholderData:e=>e,
+    refetchInterval:5000
 })
 
 return {

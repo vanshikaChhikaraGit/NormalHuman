@@ -14,6 +14,7 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { format } from "date-fns";
 import EmailDisplay from "./email-display";
+import ReplyBox from "./reply-box";
 
 const ThreadDisplay = () => {
   const { threadId, threads } = useThread();
@@ -98,7 +99,7 @@ const ThreadDisplay = () => {
         </div>
 
         <Separator></Separator>
-        <div className="overflow-scroll custom-scrollbar max-h-[calc(100vh-200px)] flex flex-col">
+        <div className="overflow-scroll custom-scrollbar max-h-[calc(100vh-300px)] flex flex-col">
             <div className="p-6 flex flex-col gap-4">
                 {thread.emails.map(email=>{
                     return <EmailDisplay key={email.id} email={email}></EmailDisplay>
@@ -106,11 +107,9 @@ const ThreadDisplay = () => {
             </div>
         </div>
         <div className="flex-1"></div>
-        <Separator className="mt-auto"></Separator>
+        <Separator className=""></Separator>
         {/* reply box  */}
-        <div className="">
-            reply box
-        </div>
+       <ReplyBox></ReplyBox>
       </div>
       </>:<>
       <div className="p-8 text-center text-muted-foreground">No mail selected</div>

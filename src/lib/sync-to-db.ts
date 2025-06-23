@@ -3,19 +3,40 @@ import { EmailAddress, EmailAttachment, EmailMessage } from "./types"
 import  pLimit from 'p-limit'
 import { Prisma } from "@prisma/client";
 
+// export const syncEmailsToDatabase = async (emails: EmailMessage[], accountId: string) => {
+
+//     const limit = pLimit(5);
+
+//     try {
+//         for (const [index, email] of emails.entries()) {
+//                 await upsertEmail(email, index, accountId);
+//         }
+//         console.log(`upserted ${emails.length} emails for account ${accountId}`);
+//     } catch (error) {
+//         console.log('error occured while upserting emails:',error)
+//     }
+
+// }
+
+type SystemLabel = 'promotions' | 'social' | 'forums' | 'personal' | 'updates';
+
 export const syncEmailsToDatabase = async (emails: EmailMessage[], accountId: string) => {
-
     const limit = pLimit(5);
-
+    
     try {
-        for (const [index, email] of emails.entries()) {
-                await upsertEmail(email, index, accountId);
-        }
-        console.log(`upserted ${emails.length} emails for account ${accountId}`);
-    } catch (error) {
-        console.log('error occured while upserting emails:',error)
-    }
+        const filteredEmails = emails.filter(email => {
+            // Skip emails with these labels
+            const unwantedLabels: SystemLabel[] = ['promotions', 'social', 'forums'];
+            return !unwantedLabels.some(label => email.sysClassifications.includes(label));
+        });
 
+        for (const [index, email] of filteredEmails.entries()) {
+            await upsertEmail(email, index, accountId);
+        }
+        console.log(`Filtered ${emails.length - filteredEmails.length} emails, upserted ${filteredEmails.length} emails for account ${accountId}`);
+    } catch (error) {
+        console.log('error occurred while upserting emails:', error);
+    }
 }
 
 const upsertEmail = async (email:EmailMessage,index:number, accountId:string)=>{
